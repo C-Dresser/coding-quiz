@@ -24,7 +24,13 @@ function showEnd() {
 //added functionality to start button
 startButton.addEventListener('click', function(event) {
     showQ1();
-    console.log('clicked')
+});
+//added functionality to answer buttons
+question1Screen.addEventListener('click', function(event){
+    if (event.target.matches('button')) {
+        console.log('correct!')
+        showEnd();
+    }
 });
 //Made start the default screen
 function init () {
