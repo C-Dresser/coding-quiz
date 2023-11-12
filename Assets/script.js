@@ -3,8 +3,9 @@ var startScreen = document.querySelector('.start');
 var question1Screen = document.querySelector('.q1');
 var endScreen = document.querySelector('.end');
 var startButton = document.querySelector('#start-btn');
-var correct = document.querySelector('[data-type="correct"]');
-var incorrect = document.querySelector('[data-type="incorrect"]');
+//var correct = document.querySelector('[data-type="correct"]');
+//var incorrect = document.querySelector('[data-type="incorrect"]');
+//var answerButton = document.querySelector('.answer')
 
 //Added show screen functions
 function showStart() {
@@ -24,11 +25,15 @@ function showEnd() {
     question1Screen.style.display = "none";
     endScreen.style.display = null;
 }
-
+//THIS FUNCTION DOES NOT WORK PROPERLY!!! FIX AFTER WORK TOMORROW!
+//Fixed function, it now checks if an answer is correct or not and logs it to the console. 
 function checkAnswer() {
-    if (correct) {
+    var answer = event.target;
+    var state = answer.getAttribute("data-type");
+
+    if (state === "correct") {
         console.log('Correct!');
-    } else if (incorrect) {
+    } else if (state === "incorrect") {
         console.log('Incorrect:(');
     }
 }
