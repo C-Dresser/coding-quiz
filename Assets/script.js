@@ -7,6 +7,8 @@ var question4Screen = document.querySelector('.q4');
 var question5Screen = document.querySelector('.q5');
 var endScreen = document.querySelector('.end');
 var startButton = document.querySelector('#start-btn');
+var saveButton = document.getElementById("save");
+var userid = document.getElementById("userid")
 
 //Added show screen functions
 //Added show functions for new questions
@@ -131,6 +133,15 @@ question5Screen.addEventListener('click', function (event) {
         checkAnswer(event);
         showEnd();
     }
+});
+//Wrote a function to write user initials to console. will change to local storage later
+function save () {
+    console.log(userid.value.trim());
+}
+
+saveButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    save();
 });
 
 //Made start the default screen
