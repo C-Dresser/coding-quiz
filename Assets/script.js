@@ -9,6 +9,10 @@ var endScreen = document.querySelector('.end');
 var startButton = document.querySelector('#start-btn');
 var saveButton = document.getElementById("save");
 var userid = document.getElementById("userid")
+var scoreEl = document.getElementById("score");
+var score = 100;
+
+scoreEl.textContent = score;
 
 //Added show screen functions
 //Added show functions for new questions
@@ -83,6 +87,7 @@ function showEnd() {
 }
 //THIS FUNCTION DOES NOT WORK PROPERLY!!! FIX AFTER WORK TOMORROW!
 //Fixed function, it now checks if an answer is correct or not and logs it to the console. 
+//Added score functionality
 function checkAnswer(event) {
     var answer = event.target;
     var state = answer.getAttribute("data-type");
@@ -91,7 +96,10 @@ function checkAnswer(event) {
         console.log('Correct!');
     } else if (state === "incorrect") {
         console.log('Incorrect:(');
+        score -= 15
     }
+    console.log('score', score)
+    scoreEl.textContent = score;
 }
 
 //added functionality to start button
@@ -136,9 +144,11 @@ question5Screen.addEventListener('click', function (event) {
 });
 //Wrote a function to write user initials to console. will change to local storage later
 //Function now writes to local storage
+//Function also writes user score to local storage
 function save () {
     console.log(JSON.stringify(userid.value.trim()));
     localStorage.setItem("User", (JSON.stringify(userid.value.trim())));
+    localStorage.setItem("Score", (JSON.stringify(score)));
 }
 
 
