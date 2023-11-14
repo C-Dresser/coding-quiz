@@ -135,9 +135,12 @@ question5Screen.addEventListener('click', function (event) {
     }
 });
 //Wrote a function to write user initials to console. will change to local storage later
+//Function now writes to local storage
 function save () {
-    console.log(userid.value.trim());
+    console.log(JSON.stringify(userid.value.trim()));
+    localStorage.setItem("User", (JSON.stringify(userid.value.trim())));
 }
+
 
 saveButton.addEventListener('click', function (event) {
     event.preventDefault();
