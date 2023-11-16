@@ -6,6 +6,7 @@ var question3Screen = document.querySelector('.q3');
 var question4Screen = document.querySelector('.q4');
 var question5Screen = document.querySelector('.q5');
 var endScreen = document.querySelector('.end');
+var scoreScreen = document.querySelector('.scoreScreen');
 var startButton = document.querySelector('#start-btn');
 var saveButton = document.getElementById("save");
 var userid = document.getElementById("userid")
@@ -13,7 +14,6 @@ var scoreEl = document.getElementById("score");
 var score = 100;
 
 scoreEl.textContent = score;
-
 //Added show screen functions
 //Added show functions for new questions
 function showStart() {
@@ -24,6 +24,7 @@ function showStart() {
     question4Screen.style.display = "none";
     question5Screen.style.display = "none";
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showQ1() {
@@ -34,6 +35,7 @@ function showQ1() {
     question4Screen.style.display = "none";
     question5Screen.style.display = "none";
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showQ2() {
@@ -44,6 +46,7 @@ function showQ2() {
     question4Screen.style.display = "none";
     question5Screen.style.display = "none";
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showQ3() {
@@ -54,6 +57,7 @@ function showQ3() {
     question4Screen.style.display = "none";
     question5Screen.style.display = "none";
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showQ4() {
@@ -64,6 +68,7 @@ function showQ4() {
     question4Screen.style.display = null;;
     question5Screen.style.display = "none";
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showQ5() {
@@ -74,6 +79,7 @@ function showQ5() {
     question4Screen.style.display = "none";
     question5Screen.style.display = null;;
     endScreen.style.display = "none";
+    scoreScreen.style.display = "none";
 }
 
 function showEnd() {
@@ -84,6 +90,18 @@ function showEnd() {
     question4Screen.style.display = "none";
     question5Screen.style.display = "none";
     endScreen.style.display = null;
+    scoreScreen.style.display = "none";
+}
+
+function showScoreScreen() {
+    startScreen.style.display = "none";
+    question1Screen.style.display = "none";
+    question2Screen.style.display = "none";
+    question3Screen.style.display = "none";
+    question4Screen.style.display = "none";
+    question5Screen.style.display = "none";
+    endScreen.style.display = "none";
+    scoreScreen.style.display = null;
 }
 //THIS FUNCTION DOES NOT WORK PROPERLY!!! FIX AFTER WORK TOMORROW!
 //Fixed function, it now checks if an answer is correct or not and logs it to the console. 
@@ -101,7 +119,6 @@ function checkAnswer(event) {
     console.log('score', score)
     scoreEl.textContent = score;
 }
-
 //added functionality to start button
 startButton.addEventListener('click', function(event) {
     showQ1();
@@ -142,6 +159,20 @@ question5Screen.addEventListener('click', function (event) {
         showEnd();
     }
 });
+//Added function to show score screen and start screen
+endScreen.addEventListener('click', function (event) {
+    if (event.target.matches('button')) {
+        showScoreScreen();
+    }
+});
+
+scoreScreen.addEventListener('click', function (event) {
+    if (event.target.matches('button')) {
+        showStart()
+        score = 100;
+        scoreEl.textContent = score;
+    }
+});
 //Wrote a function to write user initials to console. will change to local storage later
 //Function now writes to local storage
 //Function also writes user score to local storage
@@ -151,12 +182,10 @@ function save () {
     localStorage.setItem("Score", (JSON.stringify(score)));
 }
 
-
 saveButton.addEventListener('click', function (event) {
     event.preventDefault();
     save();
 });
-
 //Made start the default screen
 function init () {
     showStart();
