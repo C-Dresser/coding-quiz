@@ -9,5 +9,6 @@ This is a quiz with a 99 second timer. the timer will drop an additional 15 seco
 ![Quiz Question Screen](Assets/Images/quiz-question-screen.png)
 ![Quiz End Screen](Assets/Images/quiz-end-screen.png)
 
-## Live Site
+## Links
 
+[Live Site](https://c-dresser.github.io/coding-quiz/)
