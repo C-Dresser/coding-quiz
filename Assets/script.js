@@ -13,6 +13,8 @@ var userid = document.getElementById("userid")
 var scoreEl = document.getElementById("score");
 var score = 100;
 var scoreTimer = 100;
+var userDisplay = document.getElementById("userDisplay");
+var scoreDisplay = document.getElementById("scoreDisplay");
 
 scoreEl.textContent = score;
 //Added show screen functions
@@ -117,9 +119,9 @@ function checkAnswer(event) {
         console.log('Incorrect:(');
         score -= 15
     }
-    console.log('score', score)
     scoreEl.textContent = score;
 }
+
 //added functionality to start button
 //added a timer funstion to the score
 startButton.addEventListener('click', function (event) {
@@ -127,7 +129,6 @@ startButton.addEventListener('click', function (event) {
 
     scoreTimer = setInterval(function () {
         score--;
-        console.log('score', score);
         scoreEl.textContent = score;
 
         if (score <= 0) {
@@ -172,11 +173,29 @@ question5Screen.addEventListener('click', function (event) {
         clearInterval(scoreTimer);
     }
 });
+
+function save() {
+    var storedUser = JSON.stringify(userid.value.trim());
+    var storedScore = JSON.stringify(score);
+    localStorage.setItem("User", storedUser);
+    localStorage.setItem("Score", storedScore);
+    console.log(storedUser);
+    console.log(storedScore);
+}
 //Added function to show score screen and start screen
 endScreen.addEventListener('click', function (event) {
     if (event.target.matches('button')) {
-        
         showScoreScreen();
+        var storedUser = localStorage.getItem("User");
+        var storedScore = localStorage.getItem("Score");
+
+        console.log("Stored User:", storedUser);
+        console.log("Stored Score:", storedScore);
+
+        save();
+
+        userDisplay.textContent = storedUser ? "User: " + storedUser : "User: N/A";
+        scoreDisplay.textContent = storedScore ? "Score: " + storedScore : "Score: N/A";
     }
 });
 
@@ -190,16 +209,7 @@ scoreScreen.addEventListener('click', function (event) {
 //Wrote a function to write user initials to console. will change to local storage later
 //Function now writes to local storage
 //Function also writes user score to local storage
-function save () {
-    console.log(JSON.stringify(userid.value.trim()));
-    localStorage.setItem("User", (JSON.stringify(userid.value.trim())));
-    localStorage.setItem("Score", (JSON.stringify(score)));
-}
 
-saveButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    save();
-});
 //Made start the default screen
 function init () {
     showStart();
