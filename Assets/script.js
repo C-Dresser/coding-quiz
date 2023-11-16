@@ -12,6 +12,7 @@ var saveButton = document.getElementById("save");
 var userid = document.getElementById("userid")
 var scoreEl = document.getElementById("score");
 var score = 100;
+var scoreTimer = 100;
 
 scoreEl.textContent = score;
 //Added show screen functions
@@ -120,8 +121,19 @@ function checkAnswer(event) {
     scoreEl.textContent = score;
 }
 //added functionality to start button
-startButton.addEventListener('click', function(event) {
+//added a timer funstion to the score
+startButton.addEventListener('click', function (event) {
     showQ1();
+
+    scoreTimer = setInterval(function () {
+        score--;
+        console.log('score', score);
+        scoreEl.textContent = score;
+
+        if (score <= 0) {
+            clearInterval(scoreTimer);
+        }
+    }, 1000);
 });
 //added functionality to answer buttons
 //added eventListeners to new questions
@@ -156,12 +168,14 @@ question4Screen.addEventListener('click', function (event) {
 question5Screen.addEventListener('click', function (event) {
     if (event.target.matches('button')) {
         checkAnswer(event);
-        showEnd();
+        showEnd()
+        clearInterval(scoreTimer);
     }
 });
 //Added function to show score screen and start screen
 endScreen.addEventListener('click', function (event) {
     if (event.target.matches('button')) {
+        
         showScoreScreen();
     }
 });
